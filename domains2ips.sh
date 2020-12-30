@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -z "$1" ]; then
-  echo "Uso: ./domains2ips.sh domains.txt"
+  echo "Use: ./domains2ips.sh [domainsfile]"
   exit 1
 fi
 while read d || [[ -n $d ]]; do
@@ -9,11 +9,11 @@ while read d || [[ -n $d ]]; do
     echo "$d ; $ip"
     echo $ip >> domains.tmp
   else
-    echo "$d => Fallo al resolver dominio"
+    echo "$d => Fail resolving"
   fi
 done < $1
 sort domains.tmp | uniq > domains.new
-echo -e "\nMostrando IPs agrupadas"
+echo -e "\nGrouping IPs:"
 cat domains.new
 rm domains.tmp
 rm domains.new
